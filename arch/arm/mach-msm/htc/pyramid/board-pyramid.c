@@ -1832,10 +1832,6 @@ static void __init reserve_ion_memory(void)
 {
 #ifdef CONFIG_ION_MSM
 	unsigned int i;
-	int ret;
-
-	ret = memblock_remove(MSM_ION_SF_BASE, MSM_ION_SF_SIZE);
-	BUG_ON(ret);
 
 	for (i = 0; i < ion_pdata.nr; ++i) {
 		struct ion_platform_heap *heap = &(ion_pdata.heaps[i]);
@@ -1853,12 +1849,10 @@ static void __init reserve_ion_memory(void)
 #endif
 }
 
-static void __init reserve_mdp_memory(void);
 
 static void __init msm8x60_calculate_reserve_sizes(void)
 {
 	reserve_ion_memory();
-	reserve_mdp_memory();
 }
 
 static int msm8x60_paddr_to_memtype(unsigned int paddr)
@@ -2310,10 +2304,6 @@ static void __init pyramid_map_io(void)
 		pr_err("socinfo_init() failed!\n");
 }
 
-static void __init reserve_mdp_memory(void)
-{
-        msm8x60_mdp_writeback(msm8x60_reserve_table);
-}
 
 static void __init msm8x60_gfx_init(void)
 {
