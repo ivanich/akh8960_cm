@@ -1830,10 +1830,6 @@ static void __init reserve_ion_memory(void)
 {
 #ifdef CONFIG_ION_MSM
 	unsigned int i;
-	int ret;
-
-	ret = memblock_remove(MSM_ION_SF_BASE, MSM_ION_SF_SIZE);
-	BUG_ON(ret);
 
 	for (i = 0; i < ion_pdata.nr; ++i) {
 		struct ion_platform_heap *heap = &(ion_pdata.heaps[i]);
